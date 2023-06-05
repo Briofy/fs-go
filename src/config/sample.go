@@ -10,39 +10,39 @@ func (s SampleConfig) GeSignedPeriod() time.Duration {
 }
 
 func (s SampleConfig) GetSpaceKey() string {
-	return "DO00QNH8XPWKQ8LACPYH"
+	return "SampleSpaceKey"
 }
 
 func (s SampleConfig) GetSpaceSecret() string {
-	return "8fW6lccpP19IjpTRCxS7AENWuhiz6/768ftZ7KDfyws"
+	return "SampleSpaceSecret"
 }
 
 func (s SampleConfig) GetSpaceRegion() string {
-	return "eu-central-1"
+	return "SampleSpace"
 }
 
 func (s SampleConfig) GetSpaceEndpoint() string {
-	return "https://traderfour.fra1.digitaloceanspaces.com"
+	return "SampleSpaceEndpoint"
 }
 
 func (s SampleConfig) GetSpaceBucket() string {
-	return "t4"
+	return "SampleSpaceBucket"
 }
 
 func (s SampleConfig) GetDatabaseDriver() string {
-	return "postgres"
+	return "SampleDatabaseDriver"
 }
 
 func (s SampleConfig) GetStorageType() string {
-	return "file"
+	return "SampleStorageType"
 }
 
 func (s SampleConfig) GetS3Bucket() string {
-	return ""
+	return "SampleS3Bucket"
 }
 
 func (s SampleConfig) GetDSN() string {
-	return "host=localhost user=sajjad password=sajjad123 dbname=fs port=5432 sslmode=require TimeZone=UTC"
+	return "SampleDSN"
 }
 
 func mio() Config {

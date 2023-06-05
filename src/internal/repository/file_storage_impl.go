@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 	"fmt"
-	"github.com/fs-go/src/internal/contract/storage"
+	"github.com/Briofy/fs-go/src/internal/contract/storage"
 	"io"
 	"os"
 )
@@ -20,9 +20,12 @@ func NewStorageRepo() storage.Repository {
 	}
 }
 
-func (s StorageRepo) Get(ctx context.Context, id uint) (string, error) {
-	//TODO implement me
-	panic("implement me")
+func (s StorageRepo) Get(ctx context.Context, filePath string) (string, error) {
+	return filePath, nil
+}
+
+func (s StorageRepo) GetBatch(ctx context.Context, filePath []string) ([]string, error) {
+	return filePath, nil
 }
 
 func (s StorageRepo) Upload(ctx context.Context, reader io.Reader, fileName string) error {

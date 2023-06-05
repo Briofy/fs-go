@@ -2,18 +2,16 @@ package service
 
 import (
 	"context"
-	"github.com/fs-go/src/internal/contract/attachable"
-	"github.com/fs-go/src/internal/contract/storage"
-	"github.com/fs-go/src/internal/repository"
-	"github.com/fs-go/src/service/file_manager"
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/stdlib"
+	"github.com/Briofy/fs-go/src/config"
+	"github.com/Briofy/fs-go/src/internal/contract/attachable"
+	"github.com/Briofy/fs-go/src/internal/contract/storage"
+	"github.com/Briofy/fs-go/src/internal/repository"
+	"github.com/Briofy/fs-go/src/pkg/db"
+	databaseDriver "github.com/Briofy/fs-go/src/pkg/db/database"
+	"github.com/Briofy/fs-go/src/pkg/storage/s3"
+	"github.com/Briofy/fs-go/src/service/file_manager"
 	_ "github.com/lib/pq"
-	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
-	"log"
-	"os"
 )
 
 type Container struct {
@@ -23,8 +21,13 @@ type Container struct {
 	FileManager    file_manager.UseCase
 }
 
-func New(ctx context.Context, dsn string) (*Container, error) {
-	database, err := newPostgresConn(dsn)
+func NewFile(ctx context.Context, config config.Config) (*Container, error) {
+	var database *gorm.DB
+	initDb, err := db.GetInitDb(databaseDriver.Driver(config.GetDatabaseDriver()))
+	if err != nil {
+		return nil, err
+	}
+	database, err = initDb(config)
 	if err != nil {
 		return nil, err
 	}
@@ -39,31 +42,26 @@ func New(ctx context.Context, dsn string) (*Container, error) {
 	}, nil
 }
 
-func newPostgresConn(dsn string) (*gorm.DB, error) {
-	_ = logger.New(
-		log.New(os.Stdout, "\r\n", log.LstdFlags),
-		logger.Config{
-			LogLevel: logger.Info,
-		},
-	)
-	dbConfig, err := pgx.ParseConfig(dsn)
+func NewS3(ctx context.Context, config config.Config) (*Container, error) {
+	var database *gorm.DB
+	initDb, err := db.GetInitDb(databaseDriver.Driver(config.GetDatabaseDriver()))
 	if err != nil {
 		return nil, err
 	}
-	if err != nil {
-		log.Println("DB Connection error : ", err.Error())
-		return nil, err
-	}
-	dbSql := stdlib.OpenDB(*dbConfig)
-	gdb, err := gorm.Open(postgres.New(postgres.Config{
-		Conn: dbSql,
-	}), &gorm.Config{})
-	gdb.Debug()
+	database, err = initDb(config)
 	if err != nil {
 		return nil, err
 	}
-
-	return gdb, nil
+	attachableRepo := repository.NewAttachableRepo(database)
+	s3StorageConnector := s3.NewS3(config)
+	storageRepo := repository.NewS3StorageRepo(s3StorageConnector, config)
+	fileManager := file_manager.New(attachableRepo, storageRepo)
+	return &Container{
+		db:             database,
+		attachableRepo: attachableRepo,
+		storageRepo:    storageRepo,
+		FileManager:    fileManager,
+	}, nil
 }
 
 func (c Container) Migrate() error {

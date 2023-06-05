@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/fs-go/src/entity"
-	"github.com/fs-go/src/service"
-	"github.com/fs-go/src/service/file_manager"
+	"github.com/Briofy/fs-go/src/config"
+	"github.com/Briofy/fs-go/src/entity"
+	"github.com/Briofy/fs-go/src/service"
+	"github.com/Briofy/fs-go/src/service/file_manager"
 	"os"
 	"time"
 )
@@ -13,8 +14,8 @@ import (
 func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Second)
 	defer cancel()
-	dsn := "host=localhost user=sajjad password=sajjad123 dbname=fs port=5432 sslmode=require TimeZone=UTC"
-	container, err := service.New(ctx, dsn)
+	var cfg config.SampleConfig
+	container, err := service.NewFile(ctx, cfg)
 	if err != nil {
 		panic(err)
 	}

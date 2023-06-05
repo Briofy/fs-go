@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/fs-go/src/entity"
+	"github.com/Briofy/fs-go/src/entity"
 	"gorm.io/gorm"
 )
 

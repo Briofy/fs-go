@@ -1,8 +1,8 @@
 package file_manager
 
 import (
-	"github.com/fs-go/src/internal/contract/attachable"
-	"github.com/fs-go/src/internal/contract/storage"
+	"github.com/Briofy/fs-go/src/internal/contract/attachable"
+	"github.com/Briofy/fs-go/src/internal/contract/storage"
 	"io"
 )
 

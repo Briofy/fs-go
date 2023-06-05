@@ -2,7 +2,7 @@ package attachable
 
 import (
 	"context"
-	"github.com/fs-go/src/entity"
+	"github.com/Briofy/fs-go/src/entity"
 )
 
 type Reader interface {
@@ -14,7 +14,7 @@ type Writer interface {
 	Delete(ctx context.Context, attachable entity.Attachable) error
 }
 
-//go:generate mockgen -destination=../../mock/repository/attachable/attachable_mock.go -package=AttachableMock -self_package=github.com/fs-go/src/internal/contract/attachable github.com/fs-go/src/internal/contract/attachable Repository
+//go:generate mockgen -destination=../../mock/repository/attachable/attachable_mock.go -package=AttachableMock -self_package=github.com/Briofy/fs-go/src/internal/contract/attachable github.com/Briofy/fs-go/src/internal/contract/attachable Repository
 
 type Repository interface {
 	Reader

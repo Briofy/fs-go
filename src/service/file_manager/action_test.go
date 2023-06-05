@@ -2,10 +2,10 @@ package file_manager_test
 
 import (
 	"context"
-	"github.com/fs-go/src/entity"
-	AttachableMock "github.com/fs-go/src/internal/mock/repository/attachable"
-	StorageMock "github.com/fs-go/src/internal/mock/repository/storage"
-	"github.com/fs-go/src/service/file_manager"
+	"github.com/Briofy/fs-go/src/entity"
+	AttachableMock "github.com/Briofy/fs-go/src/internal/mock/repository/attachable"
+	StorageMock "github.com/Briofy/fs-go/src/internal/mock/repository/storage"
+	"github.com/Briofy/fs-go/src/service/file_manager"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 	"io"

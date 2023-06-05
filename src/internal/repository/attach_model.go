@@ -1,13 +1,16 @@
 package repository
 
 import (
-	"github.com/fs-go/src/entity"
+	"github.com/Briofy/fs-go/src/entity"
 	"gorm.io/gorm"
 )
 
 type Attach struct {
 	gorm.Model
-	Path string
+	Path    string
+	Disk    string
+	Type    string
+	Options string
 	// todo every thing with need
 }
 

@@ -18,7 +18,7 @@ type Container struct {
 	db             *gorm.DB
 	attachableRepo attachable.Repository
 	storageRepo    storage.Repository
-	FileManager    file_manager.UseCase
+	file_manager.UseCase
 }
 
 func NewFile(ctx context.Context, config config.Config) (*Container, error) {
@@ -38,7 +38,7 @@ func NewFile(ctx context.Context, config config.Config) (*Container, error) {
 		db:             database,
 		attachableRepo: attachableRepo,
 		storageRepo:    storageRepo,
-		FileManager:    fileManager,
+		UseCase:        fileManager,
 	}, nil
 }
 
@@ -60,7 +60,7 @@ func NewS3(ctx context.Context, config config.Config) (*Container, error) {
 		db:             database,
 		attachableRepo: attachableRepo,
 		storageRepo:    storageRepo,
-		FileManager:    fileManager,
+		UseCase:        fileManager,
 	}, nil
 }
 

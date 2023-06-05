@@ -17,4 +17,4 @@ The official repository for File System module from Briofy for Go
 
 ## Contributors
 
-Thank you for contributing to the GORM framework!
+Thank you for contributing to the FS-GO!

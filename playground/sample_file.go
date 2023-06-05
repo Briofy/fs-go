@@ -38,11 +38,11 @@ func main() {
 		File:     f,
 		FileName: "file e man",
 	}
-	err = container.FileManager.Upload(ctx, &attachable, file)
+	err = container.Upload(ctx, &attachable, file)
 	if err != nil {
 		fmt.Printf("upload file file Error | %s", err)
 
 	}
-	fmt.Println(container.FileManager.GetLink(ctx, attachable))
+	fmt.Println(container.GetLink(ctx, attachable))
 
 }

@@ -14,7 +14,7 @@ func (s SampleConfig) GetSpaceKey() string {
 }
 
 func (s SampleConfig) GetSpaceSecret() string {
-	return "SampleSpaceSecret"
+	return "SampleSpaceSecrett"
 }
 
 func (s SampleConfig) GetSpaceRegion() string {
